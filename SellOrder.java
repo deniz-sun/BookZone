@@ -1,7 +1,10 @@
+package com.bookzone;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 public class SellOrder extends JFrame implements ActionListener{
 
@@ -10,14 +13,15 @@ public class SellOrder extends JFrame implements ActionListener{
     JLabel sellOrder,bookName,bookType,bookPrice,conditionScore;
     JButton lesson1,lesson2,sendRequest;
     GridBagConstraints gbc;
+    Font font = new Font("Arial",Font.PLAIN,18);
+
 
     //constructor
     public SellOrder(){
         //frame
         setTitle("Sell Order");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1100,750);
-        setVisible(true);
+        setSize(1000,700);
 
         //panel
         panel = new JPanel();
@@ -39,7 +43,7 @@ public class SellOrder extends JFrame implements ActionListener{
         panel.add(sellOrder,gbc);
 
         bookName = new JLabel("Name:");
-        bookName.setFont(new Font("Arial",Font.PLAIN,18));
+        bookName.setFont(font);
         gbc.gridx = 3;
         gbc.gridy = 1;
         gbc.gridwidth = 3;
@@ -47,7 +51,7 @@ public class SellOrder extends JFrame implements ActionListener{
         panel.add(bookName,gbc);
 
         bookType = new JLabel("Type:");
-        bookType.setFont(new Font("Arial",Font.PLAIN,18));
+        bookType.setFont(font);
         gbc.gridx = 3;
         gbc.gridy = 2;
         gbc.gridwidth = 3;
@@ -55,7 +59,7 @@ public class SellOrder extends JFrame implements ActionListener{
         panel.add(bookType,gbc);
 
         bookPrice = new JLabel("Price:");
-        bookPrice.setFont(new Font("Arial",Font.PLAIN,18));
+        bookPrice.setFont(font);
         gbc.gridx = 3;
         gbc.gridy = 3;
         gbc.gridwidth = 3;
@@ -63,7 +67,7 @@ public class SellOrder extends JFrame implements ActionListener{
         panel.add(bookPrice,gbc);
 
         conditionScore = new JLabel("Condition Score");
-        conditionScore.setFont(new Font("Arial",Font.PLAIN,18));
+        conditionScore.setFont(font);
         gbc.gridx = 3;
         gbc.gridy = 4;
         gbc.gridwidth = 3;
@@ -97,14 +101,19 @@ public class SellOrder extends JFrame implements ActionListener{
         gbc.gridwidth = 10;
         gbc.fill = GridBagConstraints.BOTH;
         panel.add(sendRequest,gbc);
+
+        setVisible(true);
+
     }
 
-    public static void main(String[] args) {
-        new SellOrder();
-    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
+    }
+
+    public static void main(String[] args) {
+        new SellOrder();
     }
 }
