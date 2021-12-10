@@ -27,6 +27,7 @@ public class Transaction {
             buyer.removeCoins(order.getPrice());
             seller.addCoins(order.getPrice());
             order.removeOrder();
+            cancel();
             return true;
         }
         return false;

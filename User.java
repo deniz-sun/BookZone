@@ -10,7 +10,8 @@ public class User {
     private int totalScore;
     private int votes;
     private ArrayList<String> courses;
-    private ArrayList<Order> orders;
+    private ArrayList<Order> sellOrders;
+    private ArrayList<Order> buyOrders;
 
     public User(String name,String email, String password){
 
@@ -21,7 +22,8 @@ public class User {
         totalScore = 0;
         votes = 0;
         courses = new ArrayList<>();
-        orders = new ArrayList<>();
+        sellOrders = new ArrayList<>();
+        buyOrders = new ArrayList<>();
 
     }
 
@@ -55,8 +57,15 @@ public class User {
         return false;
     }
 
-    public void addOrder(Order order){orders.add(order);}
-    public void removeOrder(Order order){orders.remove(order);}
+    public void createSellOrder(String name, int price, String type, int conditionScore, ArrayList<String> relatedCourses){
+        sellOrders.add(new Order(name,price,type,this,conditionScore,relatedCourses,true));
+    }
+    public void createBuyOrder(String name, int price, String type, ArrayList<String> relatedCourses){
+        buyOrders.add(new Order(name,price,type,this,0,relatedCourses,false));
+    }
+    public void removeSellOrder(Order order){sellOrders.remove(order);}
+
+    public void removeBuyOrder(Order order){buyOrders.remove(order);}
 
     public void addCourse(String course){
         if (!courses.contains(course))
@@ -72,7 +81,8 @@ public class User {
                 ", coins=" + coins +
                 ", score=" + getScore() +
                 ", courses=" + courses +
-                ", orders=" + orders +
+                ", sellOrders=" + sellOrders +
+                ", buyOrders=" + buyOrders +
                 '}';
     }
 
@@ -80,7 +90,8 @@ public class User {
     public String getEmail(){return email;}
     public String getPassword(){return password;}
     public int getCoins(){return coins;}
-    public ArrayList<Order> getOrders(){return orders;}
+    public ArrayList<Order> getSellOrders(){return sellOrders;}
+    public ArrayList<Order> getBuyOrders(){return buyOrders;}
     public int getTotalScore(){return totalScore;}
     public ArrayList<String> getCourses(){return courses;}
 
@@ -92,7 +103,8 @@ public class User {
     public void setEmail(String email){this.email = email;}
     public void setPassword(String password){this.password = password;}
     public void setCoins(int coins){this.coins = coins;}
-    public void setOrders(ArrayList<Order> orders){this.orders = orders;}
+    public void setSellOrders(ArrayList<Order> orders){sellOrders = orders;}
+    public void setBuyOrders(ArrayList<Order> orders){buyOrders = orders;}
     public void setTotalScore(int score){totalScore = score;}
 
 

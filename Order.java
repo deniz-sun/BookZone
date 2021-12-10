@@ -6,6 +6,7 @@ public class Order {
 
     private String name;
     private int price;
+    private String type;
     private User advertiser;
     private int conditionScore;
     private ArrayList<String> relatedCourses;
@@ -13,15 +14,15 @@ public class Order {
     private ArrayList<User> candidates;
     private Transaction transaction;
 
-    public Order(String name, int price, User advertiser, int conditionScore, ArrayList<String> relatedCourses, boolean sellOrder){
+    public Order(String name, int price, String type, User advertiser, int conditionScore, ArrayList<String> relatedCourses, boolean sellOrder){
         this.name = name;
         this.price = price;
+        this.type = type;
         this.advertiser = advertiser;
         this.conditionScore = conditionScore;
         this.relatedCourses = relatedCourses;
         this.sellOrder = sellOrder;
         candidates = new ArrayList<>();
-        advertiser.addOrder(this);
     }
 
     public void addRelatedCourse(String course){
@@ -55,7 +56,12 @@ public class Order {
         }
     }
 
-    public void removeOrder(){advertiser.removeOrder(this);}
+    public void removeOrder(){
+        if (sellOrder)
+            advertiser.removeSellOrder(this);
+        else
+            advertiser.removeBuyOrder(this);
+    }
 
     @Override
     public String toString() {
@@ -73,6 +79,7 @@ public class Order {
 
     public String getName(){return name;}
     public int getPrice(){return price;}
+    public String getType() {return type;}
     public User getAdvertiser(){return advertiser;}
     public int getConditionScore(){return conditionScore;}
     public ArrayList<String> getRelatedCourses(){return relatedCourses;}
@@ -83,6 +90,7 @@ public class Order {
 
     public void setName(String name) {this.name = name;}
     public void setPrice(int price) {this.price = price;}
+    public void setType(String type) {this.type = type;}
     public void setAdvertiser(User advertiser) {this.advertiser = advertiser;}
     public void setConditionScore(int conditionScore) {this.conditionScore = conditionScore;}
     public void setRelatedCourses(ArrayList<String> relatedCourses) {this.relatedCourses = relatedCourses;}
