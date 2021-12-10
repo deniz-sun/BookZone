@@ -161,6 +161,7 @@ public class UserProfile extends JFrame implements ActionListener {
         browse = new JButton("Browse");
         browse.setPreferredSize(new Dimension(40,40));
         browse.setBackground(Color.GREEN);
+        browse.addActionListener(this);
         gbc.gridx = 0;
         gbc.gridy = 8;
         gbc.gridwidth = 3;
@@ -171,6 +172,7 @@ public class UserProfile extends JFrame implements ActionListener {
         logOff = new JButton("Log Off");
         logOff.setPreferredSize(new Dimension(40,40));
         logOff.setBackground(Color.GREEN);
+        logOff.addActionListener(this);
         gbc.gridx = 1;
         gbc.gridy = 8;
         gbc.gridwidth = 3;
