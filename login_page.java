@@ -1,9 +1,11 @@
+package com.bookzone;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginFrame extends JFrame implements ActionListener {
+public class login_page extends JFrame implements ActionListener {
 
     Container container = getContentPane();
     JLabel welcome = new JLabel("Welcome to ");
@@ -21,7 +23,7 @@ public class LoginFrame extends JFrame implements ActionListener {
     Color color = new Color(171,212,182);
 
 
-    public LoginFrame() {
+    public login_page() {
         setTitle("Book Zone Login Page");
         setVisible(true);
         setSize(1000,700);
@@ -30,7 +32,6 @@ public class LoginFrame extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         container.setLayout(null);
-
 
         setContents();
         addComponentsToContainer();
@@ -82,7 +83,6 @@ public class LoginFrame extends JFrame implements ActionListener {
         registration.addActionListener(this);
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
@@ -91,9 +91,9 @@ public class LoginFrame extends JFrame implements ActionListener {
             userText = userTextField.getText();
             pwdText = passwordField.getText();
             if (userText.equalsIgnoreCase("denizsun") && pwdText.equalsIgnoreCase("12345")) {
-                JOptionPane.showMessageDialog(this, "Login Successful");
+                JOptionPane.showMessageDialog(this, "successfully logged in!");
             } else {
-                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
+                JOptionPane.showMessageDialog(this, "invalid password or email!");
             }
 
         }
@@ -108,11 +108,12 @@ public class LoginFrame extends JFrame implements ActionListener {
                 passwordField.setEchoChar('*');
             }
 
-
         }
         if (e.getSource() == registration){
-            //open the registration page
+            this.setVisible(false);
+            new register_page();
         }
     }
+
 
 }
