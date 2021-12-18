@@ -110,6 +110,7 @@ public class MySellOrder extends JFrame implements ActionListener{
         courses = new JButton("CS 102");
         courses.setPreferredSize(new Dimension(80,60));
         courses.setBackground(Color.GREEN);
+        courses.addActionListener(this);
         gbc.gridx = 0;
         gbc.gridy = 7;
         gbc.gridwidth = 3;
@@ -120,6 +121,7 @@ public class MySellOrder extends JFrame implements ActionListener{
         remove = new JButton("REMOVE");
         remove.setPreferredSize(new Dimension(120,60));
         remove.setBackground(Color.GREEN);
+        remove.addActionListener(this);
         gbc.gridx = 6;
         gbc.gridy = 7;
         gbc.gridwidth = 3;
@@ -129,6 +131,7 @@ public class MySellOrder extends JFrame implements ActionListener{
         accept1= new JButton("ACCEPT");
         accept1.setPreferredSize(new Dimension(120,60));
         accept1.setBackground(Color.GREEN);
+        accept1.addActionListener(this);
         gbc.gridx = 6;
         gbc.gridy = 9;
         gbc.gridwidth = 3;
@@ -138,6 +141,7 @@ public class MySellOrder extends JFrame implements ActionListener{
         accept2 = new JButton("ACCEPT");
         accept2.setPreferredSize(new Dimension(120,60));
         accept2.setBackground(Color.GREEN);
+        accept2.addActionListener(this);
         gbc.gridx = 6;
         gbc.gridy = 10;
         gbc.gridwidth = 3;
@@ -151,6 +155,17 @@ public class MySellOrder extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+    	if(e.getSource() == accept1){
+    		this.setVisible(false);
+            new BookRequest();
+    	}
+    	else if(e.getSource() == accept2){
+    		this.setVisible(false);
+    		new BookRequest();
+    	}
+    	else if(e.getSource() == remove){
+    		courses.setVisible(false);
+    	}
 
     }
 }
