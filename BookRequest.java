@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BookRequest implements ActionListener{
+public class BookRequest extends JFrame implements ActionListener{
     //properties
     JFrame frame;
     JPanel panel;
@@ -59,6 +59,7 @@ public class BookRequest implements ActionListener{
         accept = new JButton("ACCEPT");
         accept.setPreferredSize(new Dimension(80,60));
         accept.setBackground(Color.GREEN);
+        accept.addActionListener(this);
         gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.gridwidth = 1;
@@ -68,6 +69,7 @@ public class BookRequest implements ActionListener{
         refuse = new JButton("REFUSE");
         refuse.setPreferredSize(new Dimension(80,60));
         refuse.setBackground(Color.GREEN);
+        refuse.addActionListener(this);
         gbc.gridx = 2;
         gbc.gridy = 3;
         gbc.gridwidth = 1;
@@ -81,6 +83,13 @@ public class BookRequest implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+		if (e.getSource() == accept){
+            this.setVisible(false);
+            new ApproveWindow();
+        }
+        else if (e.getSource() == refuse){
+        	this.setVisible(false);
+            new MySellOrder();
+        }
     }
 }
