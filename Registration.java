@@ -1,11 +1,20 @@
 package com.bookzone;
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.*;
+import com.google.firebase.auth.*;
+import com.google.firebase.cloud.FirestoreClient;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class register_page extends JFrame implements ActionListener {
+
     Container container = getContentPane();
     Color color = new Color(171,212,182);
     Font font = new Font("Arial", Font.PLAIN, 20);
@@ -22,13 +31,32 @@ public class register_page extends JFrame implements ActionListener {
 
     JButton registration = new JButton("Register!");
 
-    JTextField nameField = new JTextField();
-    JTextField surnameField = new JTextField();
-    JTextField phoneField = new JTextField();
-    JTextField emailField = new JTextField();
-    JTextField departmentField = new JTextField();
-    JTextField passwordField = new JTextField();
+    static JTextField nameField = new JTextField();
+    static JTextField surnameField = new JTextField();
+    static JTextField phoneField = new JTextField();
+    static JTextField emailField = new JTextField();
+    static JTextField departmentField = new JTextField();
+    static JTextField passwordField = new JTextField();
     JComboBox classesField = new JComboBox(courses);
+
+    public static void main(String[] args) throws IOException, FirebaseAuthException {
+        FileInputStream serviceAccount = new FileInputStream("./ServiceAccountKey.json");
+        FirebaseOptions options = FirebaseOptions.builder()
+                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .setDatabaseUrl("https://bookzone.firebaseio.com/")
+                .build();
+        FirebaseApp.initializeApp(options);
+        Firestore db = FirestoreClient.getFirestore();
+        UserRecord userRecord = FirebaseAuth.getInstance().getUserByEmail(emailField.getText());
+        // See the UserRecord reference doc for the contents of userRecord.
+
+
+        System.out.println("Successfully fetched user data: " + userRecord.getEmail());
+
+
+
+
+    }
 
 
     public void setContents(){
@@ -97,8 +125,12 @@ public class register_page extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registration){
+
             //creates an account and adds it to the database
+            this.setVisible(false);
+            new UserProfile();
         }
 
     }
 }
+
