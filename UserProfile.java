@@ -188,12 +188,14 @@ public class UserProfile extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-    /*	if(e.getSource() == browse ){
-    		BrowsingPage();
+    	if(e.getSource() == browse ){
+    		this.setVisible(false);
+    		new BrowsingWindow();
     	}
     	else if(e.getSource() == logOff){
-    		LoginFrame();
-    	}*/
+    		this.setVisible(false);
+    		new login_page();
+    	}
 
     }
 }
