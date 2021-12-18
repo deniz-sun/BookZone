@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public class register_page extends JFrame implements ActionListener {
 
@@ -22,51 +23,90 @@ public class register_page extends JFrame implements ActionListener {
     String[] courses = {"courses", "math", "cs", "physics", "english"};
 
     JLabel message = new JLabel("BookZone account registration");
-    JLabel name = new JLabel("Name and surname: ");
-    JLabel phone = new JLabel("Phone number: ");
-    JLabel email = new JLabel("Bilkent email: ");
+    JLabel nameLabel = new JLabel("Name and surname: ");
+    JLabel phoneLabel = new JLabel("Phone number: ");
+    JLabel emailLabel = new JLabel("Bilkent email: ");
     JLabel department = new JLabel("Department: ");
     JLabel classes = new JLabel("Current classes: ");
-    JLabel password = new JLabel("Password: ");
+    JLabel passwordLabel = new JLabel("Password: ");
 
     JButton registration = new JButton("Register!");
 
-    static JTextField nameField = new JTextField();
-    static JTextField surnameField = new JTextField();
-    static JTextField phoneField = new JTextField();
-    static JTextField emailField = new JTextField();
-    static JTextField departmentField = new JTextField();
-    static JTextField passwordField = new JTextField();
+    JTextField nameField = new JTextField();
+    JTextField surnameField = new JTextField();
+    JTextField phoneField = new JTextField();
+    JTextField emailField = new JTextField();
+    JTextField departmentField = new JTextField();
+    JPasswordField passwordField = new JPasswordField();
     JComboBox classesField = new JComboBox(courses);
+    JCheckBox showPassword = new JCheckBox("Show Password");
 
-    public static void main(String[] args) throws IOException, FirebaseAuthException {
-        FileInputStream serviceAccount = new FileInputStream("./ServiceAccountKey.json");
+    Firestore db;
+
+    String email, phone, name, password;
+
+
+    public void initializeDatabase() throws FirebaseAuthException, IOException {
+
+        String serviceKey = "src\\main\\resources\\serviceKey.json";
+        FileInputStream serviceAccount = new FileInputStream(serviceKey);
         FirebaseOptions options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setDatabaseUrl("https://bookzone.firebaseio.com/")
                 .build();
         FirebaseApp.initializeApp(options);
-        Firestore db = FirestoreClient.getFirestore();
-        UserRecord userRecord = FirebaseAuth.getInstance().getUserByEmail(emailField.getText());
-        // See the UserRecord reference doc for the contents of userRecord.
+        db = FirestoreClient.getFirestore();
+
+        email = emailField.getText();
+        phone = phoneField.getText();
+        name = nameField.getText() + " " + surnameField.getText();
+        password = passwordField.getText();
+
+        UserRecord.CreateRequest request = new UserRecord.CreateRequest()
+
+                .setEmail(email)
+                .setEmailVerified(false)
+                .setPhoneNumber(phone)
+                .setPassword(password)
+                .setPhoneNumber(phone)
+                .setDisplayName(name)
+                .setDisabled(false);
 
 
-        System.out.println("Successfully fetched user data: " + userRecord.getEmail());
 
 
+        UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
+        System.out.println("Successfully created new user: " + userRecord.getUid());
+    }
+    public String getName(){
+        return name;
+    }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+     public String getEmail(){
+        return email;
+     }
+
+    public static void main(String[] args) {
+        new login_page();
 
     }
 
 
     public void setContents(){
         message.setBounds(100,90,500,35);
-        name.setBounds(100,160,250,30);
-        phone.setBounds(100,220,250,30);
-        email.setBounds(100,280,250,30);
+        nameLabel.setBounds(100,160,250,30);
+        phoneLabel.setBounds(100,220,250,30);
+        emailLabel.setBounds(100,280,250,30);
         department.setBounds(100,340,250,30);
         classes.setBounds(100,400,250,30);
-        password.setBounds(100,460,250,30);
+        passwordLabel.setBounds(100,460,250,30);
+        showPassword.setBounds(350,500,150,30);
 
         nameField.setBounds(350,160,140,30);
         surnameField.setBounds(510,160,140,30);
@@ -80,24 +120,27 @@ public class register_page extends JFrame implements ActionListener {
         registration.addActionListener(this);
         registration.setBackground(Color.gray.brighter());
         registration.setFont(font);
+        showPassword.addActionListener(this);
+        showPassword.setBackground(color);
 
         message.setFont(new Font("Arial", Font.BOLD, 32));
-        name.setFont(font);
-        email.setFont(font);
-        phone.setFont(font);
+        nameLabel.setFont(font);
+        emailLabel.setFont(font);
+        phoneLabel.setFont(font);
         department.setFont(font);
         classes.setFont(font);
-        password.setFont(font);
+        passwordLabel.setFont(font);
+        showPassword.setFont(new Font("Arial", Font.PLAIN, 15));
     }
 
     public void addComponentsToContainer() {
         container.add(message);
-        container.add(name);
-        container.add(phone);
-        container.add(email);
+        container.add(nameLabel);
+        container.add(phoneLabel);
+        container.add(emailLabel);
         container.add(department);
         container.add(classes);
-        container.add(password);
+        container.add(passwordLabel);
         container.add(nameField);
         container.add(surnameField);
         container.add(phoneField);
@@ -106,10 +149,10 @@ public class register_page extends JFrame implements ActionListener {
         container.add(passwordField);
         container.add(classesField);
         container.add(registration);
-
+        container.add(showPassword);
     }
 
-    public register_page(){
+    public register_page() {
         setTitle("BookZone registration page");
         setVisible(true);
         setSize(1000, 700);
@@ -121,16 +164,40 @@ public class register_page extends JFrame implements ActionListener {
 
         setContents();
         addComponentsToContainer();
+
     }
+    public Firestore getDb() {
+        return db;
+    }
+
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registration){
+            
+            try {
+                initializeDatabase();
 
-            //creates an account and adds it to the database
+                ManageData data = new ManageData(db, name, email, phone, password);
+                data.addUserDocsAsMap();
+
+            } catch (FirebaseAuthException | IOException | ExecutionException | InterruptedException firebaseAuthException) {
+                firebaseAuthException.printStackTrace();
+            }
             this.setVisible(false);
             new UserProfile();
         }
+        if (e.getSource() == showPassword) {
+            if (showPassword.isSelected()) {
+                passwordField.setEchoChar((char) 0);
+            } else {
+                passwordField.setEchoChar('*');
+            }
+
+        }
 
     }
+
+
+
 }
 
