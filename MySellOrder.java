@@ -17,10 +17,9 @@ public class MySellOrder extends JFrame implements ActionListener{
     public MySellOrder(){
         //frame
         setTitle("My Sell Order");
-        setSize(1100,750);
+        setSize(1000,700);
         setBackground(new Color(70, 213, 105));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
 
         //panel
         panel = new JPanel();
@@ -147,6 +146,8 @@ public class MySellOrder extends JFrame implements ActionListener{
         gbc.gridwidth = 3;
         gbc.fill = GridBagConstraints.CENTER;
         panel.add(accept2,gbc);
+        setVisible(true);
+
     }
 
     public static void main(String[] args) {
