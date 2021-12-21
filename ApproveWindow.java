@@ -16,12 +16,12 @@ public class ApproveWindow extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Approve Window");
         setSize(1000,1000);
-        setVisible(true);
+       
 
         //panel
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
-        panel.setSize(1000,1000);
+        panel.setSize(1000,700);
         panel.setBackground(new Color(171,212,182));
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(50,50,50,50);
@@ -57,6 +57,7 @@ public class ApproveWindow extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.PAGE_END;
         panel.add(userProfile,gbc);
+        setVisible(true);
     }
 
     public static void main(String[] args) {
