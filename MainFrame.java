@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 public class MainFrame extends JFrame{
 
     public MainFrame() {
-    	setSize(1100,750);
+    	setSize(1000,700);
         getContentPane().setBackground(new Color(171,212,182));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
