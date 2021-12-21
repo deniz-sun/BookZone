@@ -19,10 +19,9 @@ public class UserProfile extends JFrame implements ActionListener {
     public UserProfile(){
         //JFrame
         setTitle("User Profile");
-        setSize(1100,750);
+        setSize(1000,700);
         getContentPane().setBackground(new Color(171,212,182));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
 
         //JPanel
         panel = new JPanel();
@@ -178,6 +177,8 @@ public class UserProfile extends JFrame implements ActionListener {
         gbc.gridwidth = 3;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(logOff,gbc);
+        setVisible(true);
+
 
     }
 
