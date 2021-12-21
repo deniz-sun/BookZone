@@ -1,3 +1,6 @@
+package com.bookzone;
+import com.bookzone.ApproveWindow;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,8 +20,8 @@ public class BookRequest extends JFrame implements ActionListener{
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Book Request");
-        frame.setSize(1000,1000);
-        frame.setVisible(true);
+        frame.setSize(1000, 700);
+
 
         //panel
         panel = new JPanel();
@@ -57,7 +60,7 @@ public class BookRequest extends JFrame implements ActionListener{
 
         //button
         accept = new JButton("ACCEPT");
-        accept.setPreferredSize(new Dimension(80,60));
+        accept.setPreferredSize(new Dimension(130,60));
         accept.setBackground(Color.GREEN);
         accept.addActionListener(this);
         gbc.gridx = 1;
@@ -67,7 +70,7 @@ public class BookRequest extends JFrame implements ActionListener{
         panel.add(accept,gbc);
 
         refuse = new JButton("REFUSE");
-        refuse.setPreferredSize(new Dimension(80,60));
+        refuse.setPreferredSize(new Dimension(130,60));
         refuse.setBackground(Color.GREEN);
         refuse.addActionListener(this);
         gbc.gridx = 2;
@@ -75,6 +78,8 @@ public class BookRequest extends JFrame implements ActionListener{
         gbc.gridwidth = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         panel.add(refuse,gbc);
+
+        frame.setVisible(true);
     }
 
     public static void main(String[] args) {
@@ -83,12 +88,12 @@ public class BookRequest extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == accept){
+        if (e.getSource() == accept){
             this.setVisible(false);
             new ApproveWindow();
         }
         else if (e.getSource() == refuse){
-        	this.setVisible(false);
+            this.setVisible(false);
             new MySellOrder();
         }
     }
