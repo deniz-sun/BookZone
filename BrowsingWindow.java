@@ -56,7 +56,7 @@ public class BrowsingWindow extends frame implements ActionListener{
 
 
     public BrowsingWindow(){
-
+        setSize(1000,700);
         setLayout(new BorderLayout());
 
         sortingOptions = new JPanel();
@@ -179,7 +179,7 @@ public class BrowsingWindow extends frame implements ActionListener{
 
         add(ordersPanelScroller,BorderLayout.CENTER);
 
-
+        setVisible(true);
 
     }
 
