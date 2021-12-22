@@ -26,7 +26,7 @@ public class UserProfile extends JFrame implements ActionListener {
         //JPanel
         panel = new JPanel();
         panel.setLayout(new GridBagLayout());
-        panel.setSize(1000,1200);
+        panel.setSize(1000,700);
         panel.setBackground(new Color(171,212,182));
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(10,100,10,120);
