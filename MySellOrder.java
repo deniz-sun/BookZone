@@ -9,7 +9,7 @@ public class MySellOrder extends JFrame implements ActionListener{
     JPanel panel;
     JComboBox bookType,addRelatedCourse;
     JTextField bookName,bookPrice;
-    JLabel mySellOrder,conditionScore,offers,name1,name2;
+    JLabel mySellOrder,bookPhoto,conditionScore,offers,name1,name2;
     JButton courses,remove,accept1,accept2;
     GridBagConstraints gbc;
 
@@ -71,7 +71,16 @@ public class MySellOrder extends JFrame implements ActionListener{
         gbc.gridheight = 2;
         gbc.fill = GridBagConstraints.CENTER;
         panel.add(mySellOrder,gbc);
-
+        
+        bookPhoto =  new JLabel("*Photo of book*");
+        bookPhoto.setFont(new Font("Arial",Font.PLAIN,21));
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 3;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.CENTER;
+        panel.add(bookPhoto,gbc);
+        
         conditionScore = new JLabel("Condition Score");
         conditionScore.setFont(new Font("Arial",Font.PLAIN,18));
         gbc.gridheight = 1;
