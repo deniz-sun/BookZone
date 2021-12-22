@@ -166,6 +166,7 @@ public class MySellOrder extends JFrame implements ActionListener{
     	}
     	else if(e.getSource() == remove){
     		courses.setVisible(false);
+            new UserProfile();
     	}
 
     }
