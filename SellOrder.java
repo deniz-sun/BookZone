@@ -4,116 +4,91 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Scanner;
 
 public class SellOrder extends JFrame implements ActionListener{
 
-    //properties frame;
-    JPanel panel;
-    JLabel sellOrder,bookName,bookType,bookPrice,conditionScore;
-    JButton lesson1,lesson2,sendRequest;
-    GridBagConstraints gbc;
-    Font font = new Font("Arial",Font.PLAIN,18);
+    //properties
+    Container container = getContentPane();
+    Color color = new Color(171,212,182);
+    Font font = new Font("Arial", Font.PLAIN, 20);
 
+    JLabel sellOrder = new JLabel("SELL ORDER");
+    JLabel bookPhoto = new JLabel("*Photo of the book*");
+    JLabel bookName = new JLabel("Name:");
+    JLabel bookType = new JLabel("Type:");
+    JLabel bookPrice = new JLabel("Price:");
+    JLabel conditionScore = new JLabel("Condition Score");
+
+    JButton lesson1 = new JButton("CS 102 ");
+    JButton lesson2 = new JButton("CS 101 ");
+    JButton sendRequest = new JButton("Send Request");
 
     //constructor
     public SellOrder(){
-        //frame
         setTitle("Sell Order");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000,700);
-
-        //panel
-        panel = new JPanel();
-        panel.setLayout(new GridBagLayout());
-        panel.setSize(1100,750);
-        panel.setBackground(new Color(171,212,182));
-        gbc = new GridBagConstraints();
-        gbc.insets = new Insets(30,60,30,60);
-        panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        add(panel);
-
-        //label
-        sellOrder = new JLabel("SELL ORDER");
-        sellOrder.setFont(new Font("Arial",Font.PLAIN,21));
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        gbc.gridwidth = 10;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(sellOrder,gbc);
-
-        bookName = new JLabel("Name:");
-        bookName.setFont(font);
-        gbc.gridx = 3;
-        gbc.gridy = 1;
-        gbc.gridwidth = 3;
-        gbc.fill = GridBagConstraints.CENTER;
-        panel.add(bookName,gbc);
-
-        bookType = new JLabel("Type:");
-        bookType.setFont(font);
-        gbc.gridx = 3;
-        gbc.gridy = 2;
-        gbc.gridwidth = 3;
-        gbc.fill = GridBagConstraints.CENTER;
-        panel.add(bookType,gbc);
-
-        bookPrice = new JLabel("Price:");
-        bookPrice.setFont(font);
-        gbc.gridx = 3;
-        gbc.gridy = 3;
-        gbc.gridwidth = 3;
-        gbc.fill = GridBagConstraints.CENTER;
-        panel.add(bookPrice,gbc);
-
-        conditionScore = new JLabel("Condition Score");
-        conditionScore.setFont(font);
-        gbc.gridx = 3;
-        gbc.gridy = 4;
-        gbc.gridwidth = 3;
-        gbc.fill = GridBagConstraints.CENTER;
-        panel.add(conditionScore,gbc);
-
-        //button
-        lesson1 = new JButton("CS 102");
-        lesson1.setPreferredSize(new Dimension(80,60));
-        lesson1.setBackground(Color.GREEN);
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(lesson1,gbc);
-
-        lesson2 = new JButton("CS 101");
-        lesson2.setPreferredSize(new Dimension(80,60));
-        lesson2.setBackground(Color.GREEN);
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        panel.add(lesson2,gbc);
-
-        sendRequest = new JButton("Send Request");
-        sendRequest.setPreferredSize(new Dimension(120,60));
-        sendRequest.setBackground(Color.GREEN);
-        gbc.gridx = 11;
-        gbc.gridy = 7;
-        gbc.gridwidth = 10;
-        gbc.fill = GridBagConstraints.BOTH;
-        panel.add(sendRequest,gbc);
-
         setVisible(true);
+        setSize(1000, 700);
+        getContentPane().setBackground(color);
 
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
+        container.setLayout(null);
+
+        setContents();
+        addComponentsToContainer();
     }
 
+    //main
+    public static void main(String[] args) {
+        new SellOrder();
+    }
 
+    //methods
+    public void setContents(){
+        sellOrder.setBounds(400,30,500,50);
+        bookPhoto.setBounds(60,80,300,200);
+        bookName.setBounds(350,160,250,30);
+        bookType.setBounds(350,240,250,30);
+        bookPrice.setBounds(350,320,250,30);
+        conditionScore.setBounds(350,400,250,30);
+        lesson1.setBounds(50,450,150,50);
+        lesson2.setBounds(50,530,150,50);
+        sendRequest.setBounds(650,550,200,50);
+
+        sendRequest.addActionListener(this);
+
+        sellOrder.setFont(new Font("Arial", Font.BOLD, 32));
+        bookPhoto.setFont(font);
+        bookName.setFont(font);
+        bookType.setFont(font);
+        bookPrice.setFont(font);
+        conditionScore.setFont(font);
+
+        lesson1.setBackground(Color.gray.brighter());
+        lesson1.setFont(font);
+        lesson2.setBackground(Color.gray.brighter());
+        lesson2.setFont(font);
+        sendRequest.setBackground(Color.gray.brighter());
+        sendRequest.setFont(font);
+    }
+
+    public void addComponentsToContainer(){
+        container.add(sellOrder);
+        container.add(bookPhoto);
+        container.add(bookName);
+        container.add(bookType);
+        container.add(bookPrice);
+        container.add(conditionScore);
+        container.add(lesson1);
+        container.add(lesson2);
+        container.add(sendRequest);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-    }
-
-    public static void main(String[] args) {
-        new SellOrder();
+        if(e.getSource() == sendRequest){
+            this.setVisible(false);
+            new SendRequestDone();
+        }
     }
 }
