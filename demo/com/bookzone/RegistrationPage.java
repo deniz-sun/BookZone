@@ -137,7 +137,7 @@ public class RegistrationPage extends JFrame implements ActionListener {
     }
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registration){
-/*
+
             try {
                 initializeDatabase();
 
@@ -150,17 +150,17 @@ public class RegistrationPage extends JFrame implements ActionListener {
             this.setVisible(false);
             new UserProfile();
 
- */
+ 
         }
         if (e.getSource() == showPassword) {
-            /*
+            
             if (showPassword.isSelected()) {
                 passwordField.setEchoChar((char) 0);
             } else {
                 passwordField.setEchoChar('*');
             }
 
-             */
+             
 
         }
 
