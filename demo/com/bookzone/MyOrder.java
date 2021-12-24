@@ -17,6 +17,7 @@ public class MyOrder extends JFrame implements ActionListener{
     JScrollPane offersScroller;
 
     JLabel mySellOrder,conditionScore,offers,name1,name2,bookType,addRelatedCourse,bookName,bookPrice;
+  //JLabel image;
     JButton confirm,remove,accept1,accept2;
     GridBagConstraints gbc;
 
@@ -83,6 +84,15 @@ public class MyOrder extends JFrame implements ActionListener{
         gbc.fill = GridBagConstraints.CENTER;
         panel.add(mySellOrder,gbc);
 
+        /**
+        image = new JLabel(new ImageIcon ("images\\math.png"));
+        getContentPane().add(image);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        panel.add(image,gbc);
+        */
         conditionScore = new JLabel("Condition Score: "+order.getConditionScore()+"/10");
         conditionScore.setFont(new Font("Arial",Font.PLAIN,18));
         gbc.gridheight = 1;
