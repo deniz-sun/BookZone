@@ -12,6 +12,7 @@ public class BookRequest extends JFrame implements ActionListener{
     JLabel bookRequest,name,requestMessage;
     JButton accept,refuse;
     GridBagConstraints gbc;
+    JLabel image = new JLabel(new ImageIcon ("images\\math.png"));
 
     //constructor
     public BookRequest(){
@@ -55,7 +56,14 @@ public class BookRequest extends JFrame implements ActionListener{
         gbc.gridy = 2;
         gbc.gridwidth = 3;
         gbc.fill = GridBagConstraints.HORIZONTAL;
+
         panel.add(requestMessage,gbc);
+        getContentPane().add(image);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        panel.add(image,gbc);
 
         //button
         accept = new JButton("ACCEPT");
@@ -83,15 +91,14 @@ public class BookRequest extends JFrame implements ActionListener{
         new BookRequest();
     }
 
-    @Override
     public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == accept){
             this.setVisible(false);
-            //new ApproveWindow();
+            new ApproveWindow();
         }
         else if (e.getSource() == refuse){
         	this.setVisible(false);
-            //new MySellOrder();
+            new MySellOrder();
         }
     }
 }
