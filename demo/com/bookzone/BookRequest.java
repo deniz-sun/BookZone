@@ -10,6 +10,7 @@ public class BookRequest extends JFrame implements ActionListener{
     JFrame frame;
     JPanel panel;
     JLabel bookRequest,name,requestMessage;
+  //JLabel bookPhoto;
     JButton accept,refuse;
     GridBagConstraints gbc;
     JLabel image = new JLabel(new ImageIcon ("images\\math.png"));
@@ -42,6 +43,15 @@ public class BookRequest extends JFrame implements ActionListener{
         gbc.fill = GridBagConstraints.CENTER;
         panel.add(bookRequest,gbc);
 
+/**
+	bookPhoto = new JLabel(new ImageIcon("images\\math.png"));
+        getContentPane().add(bookPhoto);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        panel.add(bookPhoto,gbc);
+*/
         name = new JLabel("ALPER BOZKURT");
         name.setFont(new Font("Arial",Font.PLAIN,18));
         gbc.gridx = 1;
